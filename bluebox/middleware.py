@@ -1,4 +1,3 @@
-
 from django.conf import settings
 from bluebox.converters import Converter
 
@@ -11,19 +10,20 @@ TODO:
 
 class BlueboxMiddleware(object):
 
-    def can_process_response(self, response):
+    def can_process_response(self, request, response):
         okay = (response.status_code == 200)
         is_html = ('text/html' in response['Content-Type'])
-        return okay and is_html
+        valid_output_type = (request.GET.get('output', False) in Converter.get_output_types())
+        return (okay and is_html and valid_output_type)
 
     def process_response(self, request, response):
-        if not request.GET.get('output', False):
-            response['bbox_converted'] = False
-            return response
-
-        if self.can_process_response(response):
+        if self.can_process_response(request, response):
             converter = Converter(response.content)
             response['touched'] = True
             response['bbox_converted'] = True
             # response.content = converter.convert(output=request.OUTPUT_TYPE)
             return response
+        else:
+            response['bbox_converted'] = False
+            return response
+

@@ -1,3 +1,5 @@
+
+
 ROOT_URLCONF = 'bluebox.tests.testapp.urls'
 SECRET_KEY = "test-app"
 

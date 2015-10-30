@@ -5,6 +5,7 @@ from django.test import TestCase, Client, modify_settings
 
 from bluebox.tests.testapp.views import TestMiddlewareView
 
+
 @modify_settings(MIDDLEWARE_CLASSES={
     'append': 'bluebox.middleware.BlueboxMiddleware',
 })
@@ -12,12 +13,12 @@ class BlueboxMiddlewareTestCase(TestCase):
 
     def setUp(self):
         self.client = Client()
-        self.url = '/test-middleware-view'
+        self.url = '/test-middleware-view/'
 
     def test_convert_with_middleware(self):
-        response = self.client.get(self.url + '&output=amp')
+        response = self.client.get(self.url, {'output': 'amp'})
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response['Content-Type'], 'text/html')
+        self.assertIn('text/html', response['Content-Type'])
         self.assertEqual(response['touched'], 'True')
         self.assertEqual(response['bbox_converted'], 'True')
 
@@ -27,7 +28,7 @@ class BlueboxMiddlewareTestCase(TestCase):
         self.assertEqual(response['bbox_converted'], 'False')
 
     def test_dont_convert_when_output_param_not_recognized(self):
-        response = self.client.get(self.url + '&output=foo')
+        response = self.client.get(self.url, {'output': 'foo'})
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response['bbox_converted'], 'False')
 
