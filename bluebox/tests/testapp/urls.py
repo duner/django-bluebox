@@ -3,6 +3,6 @@ from django.contrib import admin
 
 from .views import *
 
-urlpatterns = patterns(
-    url(r'^object/(?P<id>[-\w]+)/$', MockDetailView.as_view(), name='mock-detail'),
+urlpatterns = patterns('',
+	url(r'^test-middleware-view/$', TestMiddlewareView.as_view(), name='test-middleware'),
 )

@@ -1,12 +1,11 @@
-import factory
+# import factory
 
-from .models import *
+# from .models import *
 
-class MockObjectFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = MockObject
 
-    content = """
-    <p>Hello how are you doing</p>
-    <img src="http://bukk.it/l2internet2.gif" />
-    """
+# class MockObjectFactory(factory.django.DjangoModelFactory):
+#     class Meta:
+#         model = MockObject
+
+#     slug = 'test-slug'
+#     content = '<img src="http://bukk.it/l2internet2.gif" />'

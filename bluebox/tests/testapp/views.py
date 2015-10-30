@@ -1,8 +1,5 @@
-from django.views.generic import DetailView
-
-from .models import MockObject
+from django.views.generic import TemplateView
 
 
-class MockDetailView(DetailView):
-    model = MockObject
-    template_name = 'detailview.html'
+class TestMiddlewareView(TemplateView):
+    template_name = 'test_middleware_view.html'
