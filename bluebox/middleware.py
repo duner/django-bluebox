@@ -19,11 +19,9 @@ class BlueboxMiddleware(object):
     def process_response(self, request, response):
         if self.can_process_response(request, response):
             converter = Converter(response.content)
-            response['touched'] = True
             response['bbox_converted'] = True
             # response.content = converter.convert(output=request.OUTPUT_TYPE)
             return response
         else:
             response['bbox_converted'] = False
             return response
-
