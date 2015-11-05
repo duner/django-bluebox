@@ -5,9 +5,6 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase, Client, modify_settings
 from bluebox.tests.testapp.views import TestMiddlewareView
 
-from bluebox.converters import Converter, Sanitizer
-from bluebox.converters.amp import AMPConverter
-from bluebox.converters import amp as amptest
 
 @modify_settings(MIDDLEWARE_CLASSES={
     'append': 'bluebox.middleware.BlueboxMiddleware',
