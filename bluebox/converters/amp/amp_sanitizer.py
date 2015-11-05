@@ -1,5 +1,4 @@
-from bluebox.converters import Converter, Sanitizer
-
+from bluebox.converters import Sanitizer
 
 class AMPSanitizer(Sanitizer):
     """
@@ -31,37 +30,3 @@ class AMPSanitizer(Sanitizer):
         for attr in node.attrs.keys():
             if 'on' in attr:
                 del node.attrs[attr]
-
-
-class AMPConverter(Converter):
-    output_type = 'amp'
-    sanitizer = AMPSanitizer()
-
-    def transform(self):
-        pass
-
-    def convert(self):
-        pass
-
-    def get_canonical_url(self):
-        pass
-
-    def get_amp_url(self):
-        pass
-
-    def get_amp_css(self):
-        pass
-
-    def render_amp_page(self):
-        pass
-
-    def convert_html_tags_to_amp(self):
-        pass
-
-
-class AMPVideo(AMPConverter):
-    pass
-
-
-class AMPPost(AMPConverter):
-    pass

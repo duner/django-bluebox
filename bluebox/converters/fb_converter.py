@@ -1,4 +1,0 @@
-
-
-class BaseParser(object):
-	pass
